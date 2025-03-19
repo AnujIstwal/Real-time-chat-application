@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Jersey+25&display=swap");
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #2e2e2e; /* Darker background to match theme */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6b7280; /* Gray thumb for contrast */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3; /* Lighter gray on hover */
+}
