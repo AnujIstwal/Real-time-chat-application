@@ -25,6 +25,7 @@ const Dashboard = () => {
     // Fetch room list from server
     socket.on("roomList", (serverRooms) => {
       setRooms(serverRooms);
+            setIsLoading(false);
     });
 
     return () => {
