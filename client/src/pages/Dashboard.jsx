@@ -19,24 +19,22 @@ const Dashboard = () => {
   const fullName = localStorage.getItem("fullName");
 
   useEffect(() => {
-    socket.connect();
+  socket.connect();
 
-    setIsLoading(true);
-    // Fetch room list from server
-    socket.on("roomList", (serverRooms) => {
-     
-      setRooms(serverRooms);
-       setIsLoading(false);
-    });
+  setIsLoading(true);
 
+  const handleRoomList = (serverRooms) => {
+    setRooms(serverRooms);
     setIsLoading(false);
+  };
 
-    return () => {
-      setIsLoading(false);
-      socket.disconnect();
-      
-    };
-  }, []);
+  socket.on("roomList", handleRoomList);
+
+  return () => {
+    socket.off("roomList", handleRoomList);
+    socket.disconnect();
+  };
+}, []);
 
   useEffect(() => {
     socket.on("message", (msg) => {
