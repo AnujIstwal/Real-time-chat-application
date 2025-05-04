@@ -24,15 +24,17 @@ const Dashboard = () => {
     setIsLoading(true);
     // Fetch room list from server
     socket.on("roomList", (serverRooms) => {
+     
       setRooms(serverRooms);
-      setIsLoading(false);
+       setIsLoading(false);
     });
 
     setIsLoading(false);
 
     return () => {
-      socket.disconnect();
       setIsLoading(false);
+      socket.disconnect();
+      
     };
   }, []);
 
