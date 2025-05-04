@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
     socket.on("createRoom", (roomName) => {
         if (!rooms.includes(roomName)) {
             rooms.push(roomName);
-            io.emit("roomList", rooms); // Notify all clients
+            socket.emit("roomList", rooms); // Notify all clients
             console.log(`New room created: ${roomName}`);
         }
     });
