@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 const io = new Server(server, {
-    cors: { origin: "http://localhost:5173", methods: ["GET", "POST"] },
+    cors: { origin: "https://chatify-aj.netlify.app", methods: ["GET", "POST"] },
 });
 
 let rooms = ["Gaming", "Tech", "Boxing", "General", "Music"]; // Store active rooms
