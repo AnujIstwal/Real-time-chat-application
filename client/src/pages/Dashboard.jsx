@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [currentRoom, setCurrentRoom] = useState("");
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const chatRef = useRef(null);
 
@@ -20,6 +21,7 @@ const Dashboard = () => {
   useEffect(() => {
     socket.connect();
 
+    setIsLoading(true);
     // Fetch room list from server
     socket.on("roomList", (serverRooms) => {
       setRooms(serverRooms);
@@ -27,6 +29,7 @@ const Dashboard = () => {
 
     return () => {
       socket.disconnect();
+      setIsLoading(false);
     };
   }, []);
 
@@ -113,6 +116,7 @@ const Dashboard = () => {
         joinRoom={joinRoom}
         setRooms={setRooms}
         currentRoom={currentRoom}
+        isLoading={isLoading}
       />
 
       <ChatArea

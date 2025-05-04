@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { IoIosAdd } from "react-icons/io";
 import { socket } from "../socket";
 import RoomListItem from "../components/RoomListItem";
+import { PuffLoader } from "react-spinners";
 
-export default function ChatRoom({ rooms, joinRoom, currentRoom }) {
+export default function ChatRoom({ rooms, joinRoom, currentRoom, isLoading }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newRoomName, setNewRoomName] = useState("");
 
@@ -32,16 +33,24 @@ export default function ChatRoom({ rooms, joinRoom, currentRoom }) {
             <span>New room</span>
           </button>
         </div>
-        <div className="w-full rounded-3xl bg-[#292929] p-6 text-white">
-          {rooms.map((room) => (
-            <RoomListItem
-              key={room}
-              room={room}
-              onClick={() => joinRoom(room)}
-              currentRoom={currentRoom}
-            />
-          ))}
-        </div>
+
+        {isLoading ? (
+          <div className="flex min-h-[400px] w-full flex-col items-center justify-center gap-y-2 rounded-3xl bg-[#292929] p-6 text-white">
+            <PuffLoader color="white" />
+            <p className="text-sm text-zinc-300">Fetching rooms...</p>
+          </div>
+        ) : (
+          <div className="w-full rounded-3xl bg-[#292929] p-6 text-white">
+            {rooms.map((room) => (
+              <RoomListItem
+                key={room}
+                room={room}
+                onClick={() => joinRoom(room)}
+                currentRoom={currentRoom}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Room Creation Modal */}
